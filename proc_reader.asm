@@ -5,7 +5,7 @@
 global list_processes
 
 extern sys_open 
-extern sys_getdents
+extern sys_getdents64
 extern print_string
 extern ls_numeric
 
@@ -20,13 +20,10 @@ section .bss
     buffer resb buffer_size
 
 section .text
-
 list_processes:
-    ; Abre o diretório /proc
     mov rdi, proc_path          ; Ponteiro para o caminho do diretório /proc   
     mov rsi, o_rdonly           ; Modo de abertura somente leitura
     call sys_open               ; Abre o diretório e retorna um descritor de arquivo em rax
-
     mov [dirfd], rax
 
 .read_loop:                         
@@ -37,7 +34,6 @@ list_processes:
     call sys_getdents           ; Lê as entradas do diretório para o buffer
     cmp rax, 0
     jle .done                   ; Se não houver mais entradas, termina a leitura
-
     mov rbx, buffer             ; Ponteiro para o início do buffer
 
 .next_entry:

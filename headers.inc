@@ -14,6 +14,7 @@
 %define o_rdonly           0   
 
 %define buffer_size        4096 
+%define sys_getdents64     24
 
 ; ==================================
 ; Correção de Headers.inc 
