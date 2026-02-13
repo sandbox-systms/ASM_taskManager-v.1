@@ -14,7 +14,6 @@ extern ls_numeric
 section .data 
     proc_path db "/proc", 0
     newline db 10
-    newline equ $ - newline
 
 section .bss
     dirfd resq 1
@@ -35,8 +34,7 @@ list_processes:
     mov rdi, [dirfd]            ; Descritor do diretório aberto
     mov rsi, buffer
     mov rdx, buffer_size        ; Tamanho do buffer para leitura das entradas do diretório
-    call sys_getdents           ; Lê as entradas do diretório    
-
+    call sys_getdents           ; Lê as entradas do diretório para o buffer
     cmp rax, 0
     jle .done                   ; Se não houver mais entradas, termina a leitura
 

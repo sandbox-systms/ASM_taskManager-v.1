@@ -22,9 +22,9 @@ ls_numeric:
     ; RDI = Ponteiro para o buffer onde o número será armazenado
     mov al, [rdi]
     cmp al, '0'
-    jl, .false 
+    jl .false 
     cmp al, '9'
-    jg, .false
+    jg .false
     mov rax, 1
     ret
 .false:

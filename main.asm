@@ -13,6 +13,5 @@ _start:
 
     call list_processes         ; chama a função para listar os processos
 
-    mov rax, sys_exit           ; código de saída do sistema
     xor rdi, rdi                ; código de saída 0    
-    syscall                     ; chamada do sistema para sair
+    call sys_exit               ; chama a função de saída do sistema
