@@ -1,16 +1,18 @@
 ; ==================================
-; Headers.asm
+; main.asm
 ; ==================================
 
-%include sys_read           0 
-%include sys_write          1
-%include sys_open           2
-%include sys_close          3
-%include sys_getdents64     217
-%include sys_exit           60
-%include sys_kill           62
+global _start
 
-%include stdout             1
-%include o_rdonly           0   
+extern list_processes          ; declaração da função para listar os processos     
+extern sys_exit                ; declaração do código de saída do sistema 
 
-%include buffer_size        4096 
+section .text
+
+_start:
+
+    call list_processes         ; chama a função para listar os processos
+
+    mov rax, sys_exit           ; código de saída do sistema
+    xor rdi, rdi                ; código de saída 0    
+    syscall                     ; chamada do sistema para sair
